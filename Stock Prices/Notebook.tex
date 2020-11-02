@@ -1,0 +1,1062 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Stock Price Project},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs}
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+
+\title{Stock Price Project}
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+\hypertarget{the-idea}{%
+\section{The idea}\label{the-idea}}
+
+I want to try and practice my Machine Learning skills on financial data
+To do so, I wanted to try and use a dataset of 100 variables to predict
+some stock prices. I thought of trying to predict medical/Agri stocks,
+so I chose:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  TEVA {[}TEVA{]}
+\item
+  Bayer {[}BAYRY{]}
+\item
+  Pfizer {[}PFE{]}
+\item
+  Protalyx {[}PLX{]}
+\item
+  Kamada {[}KMDA{]}
+\end{enumerate}
+
+Don't use because they're either private or owned by something bigger:
+Netafim, ADAMA
+
+I thought of using these parameters: Dollar, Euro, Shekel prices Major
+stock market indicators: NASDAQ Specific stocks like ``top-30 pharma''
+Weather indicators like amount of rain in NYC (this is to see if it will
+be excluded)
+
+\hypertarget{notes-and-tips-from-ran}{%
+\section{Notes and tips from Ran:}\label{notes-and-tips-from-ran}}
+
+\begin{itemize}
+\item
+  Maybe start with something less chaotic than stocks. Stocks like TEVA
+  are affected by human elements like a CEO descision or a flop product
+  or a scandal.
+\item
+  Try and predict oil or cotton prices. if you can do that you could be
+  pretty rich
+\item
+  Anything you try will always be difficult to predict, FYI
+\item
+  I thought about doing something like extreme weather to predict oil.
+  Let's say you have a draught and that causes oil demand to peak (for
+  some unknown reason), you can then predict the next draught and go
+  into oil and make a bundle in a year (or fail miserably).
+\item
+  Keep in mind, good data is hard to get. stocks, currency and weather
+  are easy to google
+\end{itemize}
+
+\hypertarget{targets-to-predict}{%
+\section{Targets to predict}\label{targets-to-predict}}
+
+I want to try and predict, looking only up to Jan 2019, what will be the
+stock prices of the 5 companies over the course of 3 months of 2019. So
+my predictions will try and project: closing Stock prices, per week
+(thursday), for 15 weeks for the following 5 companies:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  TEVA {[}TEVA{]}
+\item
+  Bayer {[}BAYRY{]}
+\item
+  Pfizer {[}PFE{]}
+\item
+  Protalyx {[}PLX{]}
+\item
+  Kamada {[}KMDA{]}
+\end{enumerate}
+
+\hypertarget{input-data}{%
+\section{Input data}\label{input-data}}
+
+For this, I want to choose 100 parameters. they may have completely
+differnt scales but all must change over TIME.
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule
+n & Data & \# of parameters\tabularnewline
+\midrule
+\endhead
+1 & Historical data for all companies up to and including December 2018
+& 5\tabularnewline
+2 & Currency goods prices for dollars, Euro, Shekels, Yen &
+3\tabularnewline
+3 & Goods prices: Oil, Gold, Cotton, Corn, roses & 5\tabularnewline
+4 & Competitor prices for Gilead, Novartis, Monsanto, &\tabularnewline
+\bottomrule
+\end{longtable}
+
+\hypertarget{test-run-on-loading-data}{%
+\section{Test run on loading data}\label{test-run-on-loading-data}}
+
+\hypertarget{date-20042020}{%
+\subsection{date: 20/04/2020}\label{date-20042020}}
+
+I collected these elements from the web: Index data from
+\url{https://us.spindices.com/indices} Specific stock prices from Yahoo
+finance.
+
+I have: indices:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{list.files}\NormalTok{(}\StringTok{"C:/Users/anakar/Desktop/Scratchboard/Stock prices/Input Data/Indices"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "DJISCI - Dow Jones Israel Select Consumer Index.xls"   
+## [2] "DJISHI - Dow Jones Israel Select Health Care Index.xls"
+## [3] "DJISOI - Dow Jones Israel Select Oil & Gas Index.xls"  
+## [4] "DJUSCI - Dow Jones U.S. Coal Index (USD).xls"          
+## [5] "DJUSI - Dow Jones U.S. Index.xls"                      
+## [6] "SPPSI - S&P Pharmaceuticals Select Industry Index.xls"
+\end{verbatim}
+
+Stocks:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{list.files}\NormalTok{(}\StringTok{"C:/Users/anakar/Desktop/Scratchboard/Stock prices/Input Data/competitors"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Galaxosmith-GLX.csv" "Novartis-NVS.csv"    "ProtalixPLX.csv"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{list.files}\NormalTok{(}\StringTok{"C:/Users/anakar/Desktop/Scratchboard/Stock prices/Input Data/target firms"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Bayer-BAYRY.csv" "TEVA.csv"
+\end{verbatim}
+
+So all in all I have:
+
+\begin{verbatim}
+## [1] 11
+\end{verbatim}
+
+\hypertarget{importing-the-data}{%
+\subsubsection{Importing the data}\label{importing-the-data}}
+
+I'll start with the indices Their structure is .xls files, where the
+info starts at row 8, and I want only columns A and C (date and Consumer
+index)
+
+This is what I wrote today:
+
+The first one is only for the Dow Jones U.S. Index
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#### Importing Xls files #######}
+
+\KeywordTok{library}\NormalTok{(}\StringTok{"readxl"}\NormalTok{)}
+\KeywordTok{library}\NormalTok{(ggplot2)}
+
+\CommentTok{#This imports just the first one, as a test.}
+
+\NormalTok{dow_jones =}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{(read_xls    }\CommentTok{# To import file}
+\NormalTok{                          (}\StringTok{"C:/Users/anakar/Desktop/Scratchboard/Stock prices/Input Data/Indices/DJUSI - Dow Jones U.S. Index.xls"}\NormalTok{,}
+                            \DataTypeTok{range =} \StringTok{"A8:C5000"}\NormalTok{, }\DataTypeTok{col_names =}\NormalTok{ F))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in read_fun(path = enc2native(normalizePath(path)), sheet_i = sheet, : Expecting date in A2888 / R2888C1: got 'Source: S&P Dow Jones Indices LLC.
+## 
+## The launch date of the Dow Jones U.S. Index was February 14, 2000.
+## 
+## All information presented prior to the index launch date is back-tested. Back-tested performance is not actual performance, but is hypothetical. The back-test calculations are based on the same methodology that was in effect when the index was officially launched. Past performance is not an indication or guarantee of future results.  Please see the Performance Disclosure at http://www.spindices.com/regulatory-affairs-disclaimers/ for more information regarding the inherent limitations associated with back-tested performance.
+## 
+## Copyright Â© 2020 S&P Dow Jones Indices LLC. All rights reserved. Redistribution or reproduction in whole or in part are prohibited without written permission. STANDARD & POORâ€™S and S&P are registered trademarks of Standard & Poorâ€™s Financial Services LLC (â€œS&Pâ€); DOW JONES is a registered trademark of Dow Jones Tr [... truncated]
+\end{verbatim}
+
+\begin{verbatim}
+## New names:
+## * `` -> ...1
+## * `` -> ...2
+## * `` -> ...3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dow_jones[,}\DecValTok{2}\NormalTok{] =}\StringTok{ }\OtherTok{NULL}                        \CommentTok{# to delete the not-needed column}
+\KeywordTok{colnames}\NormalTok{(dow_jones) =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Date"}\NormalTok{, }\StringTok{"index"}\NormalTok{)    }\CommentTok{# changes col names}
+\KeywordTok{head}\NormalTok{(dow_jones)                             }\CommentTok{# a look at the product}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         Date  index
+## 1 2010-03-31 291.23
+## 2 2010-04-01 293.49
+## 3 2010-04-02 293.49
+## 4 2010-04-03 293.49
+## 5 2010-04-04 293.49
+## 6 2010-04-05 296.20
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{dim}\NormalTok{(dow_jones)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 4993    2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dow_jones_plot =}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(dow_jones,}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Date,}\DataTypeTok{y=}\NormalTok{index)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{()}
+
+\NormalTok{dow_jones_plot}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Removed 2118 rows containing missing values (geom_point).
+\end{verbatim}
+
+\includegraphics{Notebook_files/figure-latex/unnamed-chunk-4-1.pdf}
+
+And now to plot all 6 indices
+
+\begin{verbatim}
+## [1] "DJISCI - Dow Jones Israel Select Consumer Index.xls"   
+## [2] "DJISHI - Dow Jones Israel Select Health Care Index.xls"
+## [3] "DJISOI - Dow Jones Israel Select Oil & Gas Index.xls"  
+## [4] "DJUSCI - Dow Jones U.S. Coal Index (USD).xls"          
+## [5] "DJUSI - Dow Jones U.S. Index.xls"                      
+## [6] "SPPSI - S&P Pharmaceuticals Select Industry Index.xls"
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in read_fun(path = enc2native(normalizePath(path)), sheet_i = sheet, : Expecting date in A1574 / R1574C1: got 'Source: S&P Dow Jones Indices LLC.
+## 
+## The launch date of the Dow Jones Israel Select Consumer Index was January 31, 2011.
+## 
+## All information presented prior to the index launch date is back-tested. Back-tested performance is not actual performance, but is hypothetical. The back-test calculations are based on the same methodology that was in effect when the index was officially launched. Past performance is not an indication or guarantee of future results.  Please see the Performance Disclosure at http://www.spindices.com/regulatory-affairs-disclaimers/ for more information regarding the inherent limitations associated with back-tested performance.
+## 
+## Copyright Â© 2020 S&P Dow Jones Indices LLC. All rights reserved. Redistribution or reproduction in whole or in part are prohibited without written permission. STANDARD & POORâ€™S and S&P are registered trademarks of Standard & Poorâ€™s Financial Services LLC (â€œS&Pâ€); DOW JONES is a registered trademar [... truncated]
+\end{verbatim}
+
+\begin{verbatim}
+## New names:
+## * `` -> ...1
+## * `` -> ...2
+## * `` -> ...3
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in read_fun(path = enc2native(normalizePath(path)), sheet_i = sheet, : Expecting date in A3206 / R3206C1: got 'Source: S&P Dow Jones Indices LLC.
+## 
+## The launch date of the Dow Jones Israel Select Health Care Index was January 31, 2011.
+## 
+## All information presented prior to the index launch date is back-tested. Back-tested performance is not actual performance, but is hypothetical. The back-test calculations are based on the same methodology that was in effect when the index was officially launched. Past performance is not an indication or guarantee of future results.  Please see the Performance Disclosure at http://www.spindices.com/regulatory-affairs-disclaimers/ for more information regarding the inherent limitations associated with back-tested performance.
+## 
+## Copyright Â© 2020 S&P Dow Jones Indices LLC. All rights reserved. Redistribution or reproduction in whole or in part are prohibited without written permission. STANDARD & POORâ€™S and S&P are registered trademarks of Standard & Poorâ€™s Financial Services LLC (â€œS&Pâ€); DOW JONES is a registered trade [... truncated]
+\end{verbatim}
+
+\begin{verbatim}
+## New names:
+## * `` -> ...1
+## * `` -> ...2
+## * `` -> ...3
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in read_fun(path = enc2native(normalizePath(path)), sheet_i = sheet, : Expecting date in A1577 / R1577C1: got 'Source: S&P Dow Jones Indices LLC.
+## 
+## The launch date of the Dow Jones Israel Select Oil & Gas Index was January 31, 2011.
+## 
+## All information presented prior to the index launch date is back-tested. Back-tested performance is not actual performance, but is hypothetical. The back-test calculations are based on the same methodology that was in effect when the index was officially launched. Past performance is not an indication or guarantee of future results.  Please see the Performance Disclosure at http://www.spindices.com/regulatory-affairs-disclaimers/ for more information regarding the inherent limitations associated with back-tested performance.
+## 
+## Copyright Â© 2020 S&P Dow Jones Indices LLC. All rights reserved. Redistribution or reproduction in whole or in part are prohibited without written permission. STANDARD & POORâ€™S and S&P are registered trademarks of Standard & Poorâ€™s Financial Services LLC (â€œS&Pâ€); DOW JONES is a registered tradema [... truncated]
+\end{verbatim}
+
+\begin{verbatim}
+## New names:
+## * `` -> ...1
+## * `` -> ...2
+## * `` -> ...3
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in read_fun(path = enc2native(normalizePath(path)), sheet_i = sheet, : Expecting date in A2888 / R2888C1: got 'Source: S&P Dow Jones Indices LLC.
+## 
+## The launch date of the Dow Jones U.S. Coal Index was February 14, 2000.
+## 
+## All information presented prior to the index launch date is back-tested. Back-tested performance is not actual performance, but is hypothetical. The back-test calculations are based on the same methodology that was in effect when the index was officially launched. Past performance is not an indication or guarantee of future results.  Please see the Performance Disclosure at http://www.spindices.com/regulatory-affairs-disclaimers/ for more information regarding the inherent limitations associated with back-tested performance.
+## 
+## Copyright Â© 2020 S&P Dow Jones Indices LLC. All rights reserved. Redistribution or reproduction in whole or in part are prohibited without written permission. STANDARD & POORâ€™S and S&P are registered trademarks of Standard & Poorâ€™s Financial Services LLC (â€œS&Pâ€); DOW JONES is a registered trademark of Dow Jon [... truncated]
+\end{verbatim}
+
+\begin{verbatim}
+## New names:
+## * `` -> ...1
+## * `` -> ...2
+## * `` -> ...3
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in read_fun(path = enc2native(normalizePath(path)), sheet_i = sheet, : Expecting date in A2888 / R2888C1: got 'Source: S&P Dow Jones Indices LLC.
+## 
+## The launch date of the Dow Jones U.S. Index was February 14, 2000.
+## 
+## All information presented prior to the index launch date is back-tested. Back-tested performance is not actual performance, but is hypothetical. The back-test calculations are based on the same methodology that was in effect when the index was officially launched. Past performance is not an indication or guarantee of future results.  Please see the Performance Disclosure at http://www.spindices.com/regulatory-affairs-disclaimers/ for more information regarding the inherent limitations associated with back-tested performance.
+## 
+## Copyright Â© 2020 S&P Dow Jones Indices LLC. All rights reserved. Redistribution or reproduction in whole or in part are prohibited without written permission. STANDARD & POORâ€™S and S&P are registered trademarks of Standard & Poorâ€™s Financial Services LLC (â€œS&Pâ€); DOW JONES is a registered trademark of Dow Jones Tr [... truncated]
+\end{verbatim}
+
+\begin{verbatim}
+## New names:
+## * `` -> ...1
+## * `` -> ...2
+## * `` -> ...3
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in read_fun(path = enc2native(normalizePath(path)), sheet_i = sheet, : Expecting date in A2541 / R2541C1: got 'Source: S&P Dow Jones Indices LLC.
+## 
+## The launch date of the S&P Pharmaceuticals Select Industry Index was June 19, 2006.
+## 
+## All information presented prior to the index launch date is back-tested. Back-tested performance is not actual performance, but is hypothetical. The back-test calculations are based on the same methodology that was in effect when the index was officially launched. Past performance is not an indication or guarantee of future results.  Please see the Performance Disclosure at http://www.spindices.com/regulatory-affairs-disclaimers/ for more information regarding the inherent limitations associated with back-tested performance.
+## 
+## Copyright Â© 2020 S&P Dow Jones Indices LLC. All rights reserved. Redistribution or reproduction in whole or in part are prohibited without written permission. STANDARD & POORâ€™S and S&P are registered trademarks of Standard & Poorâ€™s Financial Services LLC (â€œS&Pâ€); DOW JONES is a registered trademar [... truncated]
+\end{verbatim}
+
+\begin{verbatim}
+## New names:
+## * `` -> ...1
+## * `` -> ...2
+## * `` -> ...3
+\end{verbatim}
+
+\begin{verbatim}
+##         Date  index file
+## 1 2010-03-31 291.23 test
+## 2 2010-04-01 293.49 test
+## 3 2010-04-02 293.49 test
+## 4 2010-04-03 293.49 test
+## 5 2010-04-04 293.49 test
+## 6 2010-04-05 296.20 test
+\end{verbatim}
+
+\begin{verbatim}
+## [1] 34951     3
+\end{verbatim}
+
+\begin{verbatim}
+## [1] 4993    2
+\end{verbatim}
+
+\begin{verbatim}
+## [1] "DJISCI - Dow Jones Israel Select Consumer Index.xls"   
+## [2] "DJISHI - Dow Jones Israel Select Health Care Index.xls"
+## [3] "DJISOI - Dow Jones Israel Select Oil & Gas Index.xls"  
+## [4] "DJUSCI - Dow Jones U.S. Coal Index (USD).xls"          
+## [5] "DJUSI - Dow Jones U.S. Index.xls"                      
+## [6] "SPPSI - S&P Pharmaceuticals Select Industry Index.xls" 
+## [7] "test"
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Removed 17472 rows containing missing values (geom_point).
+\end{verbatim}
+
+\includegraphics{Notebook_files/figure-latex/unnamed-chunk-5-1.pdf}
+
+\hypertarget{date-200421}{%
+\subsection{Date: 20/04/21}\label{date-200421}}
+
+starting 15:15
+
+What I want to do: 0. Find goods data 1. take out the ``test'' data in
+the index df 2. load the competitors data in
+
+\hypertarget{find-goods-data}{%
+\subsubsection{Find goods data}\label{find-goods-data}}
+
+found it at
+\url{https://www.indexmundi.com/commodities/?commodity=corn\&months=120}
+Downloaded: Food: Corn, Tea, Rice, Beef Industrial: Oil, Gold, Aluminum
+
+\hypertarget{taking-out-the-test-data-in-the-index-df}{%
+\subsubsection{Taking out the ``test'' data in the index
+df}\label{taking-out-the-test-data-in-the-index-df}}
+
+Updated R
+\href{https://www.linkedin.com/pulse/3-methods-update-r-rstudio-windows-mac-woratana-ngarmtrakulchol/}{like
+this}
+
+Vered woke up, and I was with her for 20 mins
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{### To take out the rows which are called "test" I want to make a vector of them and then nullify in df.}
+
+\NormalTok{test.vector =}\StringTok{ }\NormalTok{df}\OperatorTok{$}\NormalTok{file }\OperatorTok{==}\StringTok{ "test"}    \CommentTok{#This creates a true/false vector for the rows with "test"}
+\KeywordTok{summary}\NormalTok{(test.vector)               }\CommentTok{# QC: to see the number of rows to be deleted}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Mode   FALSE    TRUE 
+## logical   29958    4993
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{dim}\NormalTok{(dow_jones)                     }\CommentTok{# QC: the number of rows in the original dow jones file}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 4993    2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df.clean =}\StringTok{ }\NormalTok{df[}\OperatorTok{!}\NormalTok{test.vector, ]}
+
+\KeywordTok{dim}\NormalTok{(dow_jones)}\OperatorTok{+}\KeywordTok{dim}\NormalTok{(df.clean) }\OperatorTok{==}\StringTok{ }\KeywordTok{dim}\NormalTok{(df)   }\CommentTok{#QC before gettting rid of the old rows}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  TRUE FALSE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df =}\StringTok{ }\NormalTok{df.clean}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{load-the-competitors-data-in}{%
+\subsubsection{Load the competitors data
+in}\label{load-the-competitors-data-in}}
+
+I first will look at the data themselves. Much nicer! * .CSV files * 7
+columns, but I only want the date and closing, so 1 and 5 let's start:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#### Importing competitor files #######}
+
+
+\CommentTok{#This imports just the first one, as a test.}
+
+\NormalTok{comp.stock =}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"C:/Users/anakar/Desktop/Scratchboard/Stock prices/Input Data/Competitors/Galaxosmith-GLX.csv"}\NormalTok{, }\DataTypeTok{header =}\NormalTok{ T)[,}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{5}\NormalTok{)]}
+
+
+\KeywordTok{head}\NormalTok{(comp.stock)                             }\CommentTok{# a look at the product}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         Date Close
+## 1 2015-04-20 47.10
+## 2 2015-04-21 47.24
+## 3 2015-04-22 46.57
+## 4 2015-04-23 46.31
+## 5 2015-04-24 46.59
+## 6 2015-04-27 46.85
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{colnames}\NormalTok{(comp.stock)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Date"  "Close"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{dim}\NormalTok{(comp.stock)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1259    2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{GLX_plot =}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(comp.stock,}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Date,}\DataTypeTok{y=}\NormalTok{Close)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title=}\StringTok{"GLX stock price"}\NormalTok{)}
+
+\NormalTok{GLX_plot}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Notebook_files/figure-latex/unnamed-chunk-7-1.pdf}
+
+This doesn't look right\ldots{} let me check in excel if it looks
+different. Okay I checked. It's correct.
+
+now to get them all in:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Now to get all 3 competitors}
+
+\NormalTok{comp.stock.path =}\StringTok{ "C:/Users/anakar/Desktop/Scratchboard/Stock prices/Input Data/Competitors"}
+\NormalTok{comp.stock.files =}\StringTok{ }\KeywordTok{list.files}\NormalTok{(comp.stock.path)}
+
+\NormalTok{comp.stock.files}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Galaxosmith-GLX.csv" "Novartis-NVS.csv"    "ProtalixPLX.csv"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{comp.stock.df =}\StringTok{ }\NormalTok{comp.stock}
+\NormalTok{comp.stock.df}\OperatorTok{$}\NormalTok{stock =}\StringTok{ "GSK"}
+
+\KeywordTok{head}\NormalTok{(comp.stock.df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         Date Close stock
+## 1 2015-04-20 47.10   GSK
+## 2 2015-04-21 47.24   GSK
+## 3 2015-04-22 46.57   GSK
+## 4 2015-04-23 46.31   GSK
+## 5 2015-04-24 46.59   GSK
+## 6 2015-04-27 46.85   GSK
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(comp.stock.files)) \{}
+\NormalTok{        filename =}\StringTok{ }\NormalTok{comp.stock.files[i]}
+\NormalTok{        file =}\StringTok{ }\KeywordTok{paste}\NormalTok{(comp.stock.path, filename, }\DataTypeTok{sep =} \StringTok{"/"}\NormalTok{)}
+\NormalTok{        read =}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(file, }\DataTypeTok{header =}\NormalTok{ T)[,}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{5}\NormalTok{)]}
+
+\NormalTok{        read}\OperatorTok{$}\NormalTok{stock =}\StringTok{ }\NormalTok{filename}
+\NormalTok{        comp.stock.df =}\StringTok{ }\KeywordTok{rbind}\NormalTok{(comp.stock.df,read)}
+\NormalTok{\}}
+
+\CommentTok{#This is just a quality control}
+      \KeywordTok{head}\NormalTok{(comp.stock.df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         Date Close stock
+## 1 2015-04-20 47.10   GSK
+## 2 2015-04-21 47.24   GSK
+## 3 2015-04-22 46.57   GSK
+## 4 2015-04-23 46.31   GSK
+## 5 2015-04-24 46.59   GSK
+## 6 2015-04-27 46.85   GSK
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+      \KeywordTok{dim}\NormalTok{(comp.stock.df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 5036    3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+      \KeywordTok{dim}\NormalTok{(comp.stock)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1259    2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# to make the filenames into categories      }
+\NormalTok{comp.stock.df}\OperatorTok{$}\NormalTok{stock =}\StringTok{ }\KeywordTok{as.factor}\NormalTok{(comp.stock.df}\OperatorTok{$}\NormalTok{stock)}
+\KeywordTok{levels}\NormalTok{(comp.stock.df}\OperatorTok{$}\NormalTok{stock)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Galaxosmith-GLX.csv" "GSK"                 "Novartis-NVS.csv"   
+## [4] "ProtalixPLX.csv"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#######comp.stock.df$stock = substr(df$file, start = -5, stop = -8)}
+
+
+\KeywordTok{dim}\NormalTok{(comp.stock.df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 5036    3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(comp.stock.df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         Date Close stock
+## 1 2015-04-20 47.10   GSK
+## 2 2015-04-21 47.24   GSK
+## 3 2015-04-22 46.57   GSK
+## 4 2015-04-23 46.31   GSK
+## 5 2015-04-24 46.59   GSK
+## 6 2015-04-27 46.85   GSK
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{class}\NormalTok{(comp.stock.df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "data.frame"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{levels}\NormalTok{(comp.stock.df}\OperatorTok{$}\NormalTok{stock)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Galaxosmith-GLX.csv" "GSK"                 "Novartis-NVS.csv"   
+## [4] "ProtalixPLX.csv"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df =}\StringTok{ }\NormalTok{comp.stock.df}
+
+\KeywordTok{levels}\NormalTok{(df}\OperatorTok{$}\NormalTok{stock)=}\KeywordTok{c}\NormalTok{(}\StringTok{"GSK"}\NormalTok{,}\StringTok{"GSK2"}\NormalTok{,}\StringTok{"NVS"}\NormalTok{,}\StringTok{"PLX"}\NormalTok{)}
+\KeywordTok{levels}\NormalTok{(df}\OperatorTok{$}\NormalTok{stock)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "GSK"  "GSK2" "NVS"  "PLX"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Now let's take out GSK1}
+
+\NormalTok{takeout =}\StringTok{ }\NormalTok{df}\OperatorTok{$}\NormalTok{stock }\OperatorTok{==}\StringTok{ "GSK2"}
+\CommentTok{#takeout}
+
+\NormalTok{df =}\StringTok{ }\NormalTok{df[}\OperatorTok{!}\NormalTok{takeout,]}
+\KeywordTok{summary}\NormalTok{(df}\OperatorTok{$}\NormalTok{stock)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  GSK GSK2  NVS  PLX 
+## 1259    0 1259 1259
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(df}\OperatorTok{$}\NormalTok{Close[df}\OperatorTok{$}\NormalTok{stock }\OperatorTok{==}\StringTok{ "GSK"}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   31.85   39.46   40.74   40.91   42.42   47.89
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df =}\StringTok{ }\NormalTok{comp.stock.df}
+\NormalTok{df =}\StringTok{ }\NormalTok{df[}\OperatorTok{!}\NormalTok{takeout,]}
+\KeywordTok{summary}\NormalTok{(df}\OperatorTok{$}\NormalTok{stock)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Galaxosmith-GLX.csv                 GSK    Novartis-NVS.csv     ProtalixPLX.csv 
+##                1259                   0                1259                1259
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(df}\OperatorTok{$}\NormalTok{Close[df}\OperatorTok{$}\NormalTok{stock }\OperatorTok{==}\StringTok{ "ProtalixPLX.csv"}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   1.800   4.300   5.900   7.043   8.350  22.400
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df}\OperatorTok{$}\NormalTok{Date =}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(df}\OperatorTok{$}\NormalTok{Date, }\DataTypeTok{format=}\StringTok{'%Y-%m-%d'}\NormalTok{)}
+
+\CommentTok{# Make shorter names}
+\NormalTok{df}\OperatorTok{$}\NormalTok{filename =}\StringTok{ }\NormalTok{df}\OperatorTok{$}\NormalTok{stock}
+\KeywordTok{levels}\NormalTok{(df}\OperatorTok{$}\NormalTok{stock) =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"GLS"}\NormalTok{,}\StringTok{"test"}\NormalTok{, }\StringTok{"NVS"}\NormalTok{, }\StringTok{"PLX"}\NormalTok{)}
+
+\CommentTok{# And now plotting}
+\NormalTok{plot.comp.stock =}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(df, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Date, }\DataTypeTok{y=}\NormalTok{Close, }\DataTypeTok{col=}\NormalTok{stock)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{()}
+
+\NormalTok{plot.comp.stock.formatted =}\StringTok{ }\NormalTok{plot.comp.stock }\OperatorTok{+}\KeywordTok{theme_gray}\NormalTok{(}\DataTypeTok{base_size =} \DecValTok{20}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{legend.position=}\StringTok{"right"}\NormalTok{, }\DataTypeTok{axis.text.x =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{angle =} \DecValTok{90}\NormalTok{)) }\OperatorTok{+}\StringTok{ }\KeywordTok{scale_x_date}\NormalTok{(}\DataTypeTok{date_labels =} \StringTok{"%Y"}\NormalTok{)}
+\NormalTok{comp.stock.df =}\StringTok{ }\NormalTok{df}
+\end{Highlighting}
+\end{Shaded}
+
+So, I'm stopping now. This is not clean but getting there\ldots{}
+Updating R screwed up the ggplot somehow\ldots{} knit and out 16:40
+
+\hypertarget{new-day}{%
+\subsection{New day}\label{new-day}}
+
+What do I want to do today? 1. Fix the scale for the last figure - done
+and put into the old code
+
+\begin{verbatim}
+Alright, I fixed a stupid bug. In the line to read the new files I had a specific file loaded up each time... nevermind, moving forward. Here's the graph: 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{plot.comp.stock.formatted}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Notebook_files/figure-latex/unnamed-chunk-9-1.pdf}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  make a correlation map so that I can see correlations between
+  different data
+\end{enumerate}
+
+Let's start with the weird formatting and scale from last time
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sum.GLS =}\StringTok{ }\KeywordTok{summary}\NormalTok{(df}\OperatorTok{$}\NormalTok{Close[df}\OperatorTok{$}\NormalTok{stock }\OperatorTok{==}\StringTok{ "GLS"}\NormalTok{])}
+\NormalTok{sum.NVS =}\StringTok{ }\KeywordTok{summary}\NormalTok{(df}\OperatorTok{$}\NormalTok{Close[df}\OperatorTok{$}\NormalTok{stock }\OperatorTok{==}\StringTok{ "NVS"}\NormalTok{])}
+\NormalTok{sum.PLX =}\StringTok{ }\KeywordTok{summary}\NormalTok{(df}\OperatorTok{$}\NormalTok{Close[df}\OperatorTok{$}\NormalTok{stock }\OperatorTok{==}\StringTok{ "PLX"}\NormalTok{])}
+
+\NormalTok{stock.GLS =}\StringTok{ }\NormalTok{df}\OperatorTok{$}\NormalTok{Close[df}\OperatorTok{$}\NormalTok{stock }\OperatorTok{==}\StringTok{ "GLS"}\NormalTok{]}
+\NormalTok{stock.NVS =}\StringTok{ }\NormalTok{df}\OperatorTok{$}\NormalTok{Close[df}\OperatorTok{$}\NormalTok{stock }\OperatorTok{==}\StringTok{ "NVS"}\NormalTok{]}
+\NormalTok{stock.PLX =}\StringTok{ }\NormalTok{df}\OperatorTok{$}\NormalTok{Close[df}\OperatorTok{$}\NormalTok{stock }\OperatorTok{==}\StringTok{ "PLX"}\NormalTok{]}
+\KeywordTok{print}\NormalTok{(sum.GLS)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   31.85   39.46   40.74   40.91   42.42   47.89
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{print}\NormalTok{(sum.NVS)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   60.56   70.96   76.14   77.67   84.99   99.01
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{print}\NormalTok{(sum.PLX)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   1.800   4.300   5.900   7.043   8.350  22.400
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{class}\NormalTok{(df}\OperatorTok{$}\NormalTok{Close[df}\OperatorTok{$}\NormalTok{stock }\OperatorTok{==}\StringTok{ "GLS"}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "numeric"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{cor}\NormalTok{(stock.GLS,stock.NVS)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.4078177
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{closing =}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\KeywordTok{cbind}\NormalTok{(stock.GLS, stock.NVS,stock.PLX))}
+
+\KeywordTok{dim}\NormalTok{(closing)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1259    3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{colnames}\NormalTok{(closing)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "stock.GLS" "stock.NVS" "stock.PLX"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cor.matrix =}\StringTok{ }\KeywordTok{cor}\NormalTok{(closing)}
+\end{Highlighting}
+\end{Shaded}
+
+Now to make it into a heatmap:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+    \ControlFlowTok{if}\NormalTok{ (}\OperatorTok{!}\KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"BiocManager"}\NormalTok{, }\DataTypeTok{quietly =} \OtherTok{TRUE}\NormalTok{))}
+            \KeywordTok{install.packages}\NormalTok{(}\StringTok{"BiocManager"}\NormalTok{)}
+\NormalTok{    BiocManager}\OperatorTok{::}\KeywordTok{install}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Bioconductor version 3.10 (BiocManager 1.30.10), R 3.6.3 (2020-02-29)
+\end{verbatim}
+
+\begin{verbatim}
+## Installation path not writeable, unable to update packages: class, foreign,
+##   lattice, nlme, nnet, survival
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{    BiocManager}\OperatorTok{::}\KeywordTok{install}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"ComplexHeatmap"}\NormalTok{, }\StringTok{"AnnotationDbi"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Bioconductor version 3.10 (BiocManager 1.30.10), R 3.6.3 (2020-02-29)
+\end{verbatim}
+
+\begin{verbatim}
+## Installing package(s) 'ComplexHeatmap', 'AnnotationDbi'
+\end{verbatim}
+
+\begin{verbatim}
+## package 'ComplexHeatmap' successfully unpacked and MD5 sums checked
+## package 'AnnotationDbi' successfully unpacked and MD5 sums checked
+## 
+## The downloaded binary packages are in
+##  C:\Users\anakar\AppData\Local\Temp\RtmpOspE9d\downloaded_packages
+\end{verbatim}
+
+\begin{verbatim}
+## Installation path not writeable, unable to update packages: class, foreign,
+##   lattice, nlme, nnet, survival
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+    \KeywordTok{library}\NormalTok{(ComplexHeatmap)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: grid
+\end{verbatim}
+
+\begin{verbatim}
+## ========================================
+## ComplexHeatmap version 2.2.0
+## Bioconductor page: http://bioconductor.org/packages/ComplexHeatmap/
+## Github page: https://github.com/jokergoo/ComplexHeatmap
+## Documentation: http://jokergoo.github.io/ComplexHeatmap-reference
+## 
+## If you use it in published research, please cite:
+## Gu, Z. Complex heatmaps reveal patterns and correlations in multidimensional 
+##   genomic data. Bioinformatics 2016.
+## ========================================
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{Heatmap}\NormalTok{(cor.matrix, }
+        \DataTypeTok{cluster_columns=}\OtherTok{FALSE}\NormalTok{,}
+        \DataTypeTok{cluster_rows=}\OtherTok{FALSE}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Notebook_files/figure-latex/unnamed-chunk-11-1.pdf}
+
+So - I finished what I wanted. This took \textasciitilde1.5 hours but
+looks nice, no? Knit.
+
+\end{document}

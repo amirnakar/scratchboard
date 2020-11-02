@@ -1,0 +1,398 @@
+---
+title: "Stock Price Project"
+output:
+  html_document:
+    df_print: paged
+  pdf_document: default
+---
+
+# The idea
+
+I want to try and practice my Machine Learning skills on financial data
+To do so, I wanted to try and use a dataset of 100 variables to predict some stock prices.
+I thought of trying to predict medical/Agri stocks, so I chose: 
+
+1. TEVA     [TEVA]
+2. Bayer    [BAYRY]
+3. Pfizer   [PFE]
+4. Protalyx [PLX]
+5. Kamada   [KMDA]
+
+Don't use because they're either private or owned by something bigger: 
+Netafim, ADAMA
+
+I thought of using these parameters: 
+Dollar, Euro, Shekel prices
+Major stock market indicators: NASDAQ
+Specific stocks like "top-30 pharma"
+Weather indicators like amount of rain in NYC (this is to see if it will be excluded)
+
+# Notes and tips from Ran: 
+* Maybe start with something less chaotic than stocks. Stocks like TEVA are affected by human elements like a CEO descision or a flop product or a scandal. 
+* Try and predict oil or cotton prices. if you can do that you could be pretty rich
+* Anything you try will always be difficult to predict, FYI
+
+* I thought about doing something like extreme weather to predict oil. Let's say you have a draught and that causes oil demand to peak (for some unknown reason), you can then predict the next draught and go into oil and make a bundle in a year (or fail miserably).
+* Keep in mind, good data is hard to get. stocks, currency and weather are easy to google
+
+
+# Targets to predict
+I want to try and predict, looking only up to Jan 2019, what will be the stock prices of the 5 companies over the course of 3 months of 2019.
+So my predictions will try and project: 
+closing Stock prices, per week (thursday), for 15 weeks for the following 5 companies: 
+
+1. TEVA     [TEVA]
+2. Bayer    [BAYRY]
+3. Pfizer   [PFE]
+4. Protalyx [PLX]
+5. Kamada   [KMDA]
+
+# Input data
+
+For this, I want to choose 100 parameters. they may have completely differnt scales but all must change over TIME.
+
+n  | Data    | # of parameters
+---|---------|----------------
+1| Historical data for all companies up to and including December 2018 | 5
+2| Currency goods prices for dollars, Euro, Shekels, Yen| 3
+3| Goods prices: Oil, Gold, Cotton, Corn, roses|5
+4| Competitor prices for Gilead, Novartis, Monsanto, 
+
+
+
+
+# Test run on loading data
+## date: 20/04/2020
+
+I collected these elements from the web: 
+Index data from https://us.spindices.com/indices
+Specific stock prices from Yahoo finance.
+
+I have: 
+indices:
+```{r}
+list.files("C:/Users/anakar/Desktop/Scratchboard/Stock prices/Input Data/Indices")
+```
+Stocks: 
+```{r}
+list.files("C:/Users/anakar/Desktop/Scratchboard/Stock prices/Input Data/competitors")
+list.files("C:/Users/anakar/Desktop/Scratchboard/Stock prices/Input Data/target firms")
+```
+
+So all in all I have: 
+```{r echo=FALSE}
+index_num = length(list.files("C:/Users/anakar/Desktop/Scratchboard/Stock prices/Input Data/Indices"))
+compet_num = length(list.files("C:/Users/anakar/Desktop/Scratchboard/Stock prices/Input Data/competitors"))
+target_num = length(list.files("C:/Users/anakar/Desktop/Scratchboard/Stock prices/Input Data/target firms"))
+num_of_param = index_num+compet_num+target_num
+print(num_of_param)
+```
+
+### Importing the data
+I'll start with the indices
+Their structure is .xls files, 
+where the info starts at row 8, and I want only columns A and C (date and Consumer index)
+
+This is what I wrote today: 
+
+The first one is only for the Dow Jones U.S. Index 
+```{r}
+#### Importing Xls files #######
+
+library("readxl")
+library(ggplot2)
+
+#This imports just the first one, as a test.
+
+dow_jones = as.data.frame(read_xls    # To import file
+                          ("C:/Users/anakar/Desktop/Scratchboard/Stock prices/Input Data/Indices/DJUSI - Dow Jones U.S. Index.xls",
+                            range = "A8:C5000", col_names = F))
+dow_jones[,2] = NULL                        # to delete the not-needed column
+colnames(dow_jones) = c("Date", "index")    # changes col names
+head(dow_jones)                             # a look at the product
+dim(dow_jones)
+
+dow_jones_plot = ggplot(dow_jones,aes(x=Date,y=index)) + geom_point()
+
+dow_jones_plot
+```
+
+And now to plot all 6 indices
+
+
+```{r echo=FALSE}
+#Now to get all 6 indices
+
+index.path = "C:/Users/anakar/Desktop/Scratchboard/Stock prices/Input Data/Indices"
+index.files = list.files("C:/Users/anakar/Desktop/Scratchboard/Stock prices/Input Data/Indices")
+
+index.files
+df = dow_jones
+df$file = "test"
+
+for(i in 1:length(index.files)) {
+        filename = index.files[i]
+        file = paste(index.path, filename, sep = "/")
+        read = as.data.frame(read_xls(file, range = "A8:C5000", col_names = F))
+        read[,2] = NULL
+        colnames(read) = c("Date", "index")
+        read$file = filename
+        df = rbind(df,read)
+}
+
+#This is just a quality control
+      head(df)
+      dim(df)
+      dim(dow_jones)
+
+# to make the filenames into categories      
+df$file = as.factor(df$file)
+levels(df$file)
+df$name = substr(df$file, start = 1, stop = 5)
+
+list = df$file == "test"
+### I wanted to use this to delete the test run, but I don't have time
+
+
+# And now plotting
+plot.indices = ggplot(df, aes(x=Date, y=index, col=name)) + geom_point()
+
+plot.indices +theme_bw(base_size = 20) + theme(legend.position="bottom")
+```
+
+
+## Date: 20/04/21
+starting 15:15
+
+What I want to do: 
+0. Find goods data
+1. take out the "test" data in the index df
+2. load the competitors data in
+
+### Find goods data
+found it at https://www.indexmundi.com/commodities/?commodity=corn&months=120
+Downloaded: 
+  Food:       Corn, Tea, Rice, Beef
+  Industrial: Oil, Gold, Aluminum
+  
+  
+### Taking out the "test" data in the index df
+
+Updated R [like this](https://www.linkedin.com/pulse/3-methods-update-r-rstudio-windows-mac-woratana-ngarmtrakulchol/)
+
+Vered woke up, and I was with her for 20 mins
+
+```{r}
+### To take out the rows which are called "test" I want to make a vector of them and then nullify in df.
+
+test.vector = df$file == "test"    #This creates a true/false vector for the rows with "test"
+summary(test.vector)               # QC: to see the number of rows to be deleted
+dim(dow_jones)                     # QC: the number of rows in the original dow jones file
+df.clean = df[!test.vector, ]
+
+dim(dow_jones)+dim(df.clean) == dim(df)   #QC before gettting rid of the old rows
+df = df.clean
+```
+
+
+
+
+### Load the competitors data in
+I first will look at the data themselves.
+Much nicer!
+* .CSV files
+* 7 columns, but I only want the date and closing, so 1 and 5
+let's start: 
+
+```{r}
+#### Importing competitor files #######
+
+
+#This imports just the first one, as a test.
+
+comp.stock = read.csv("C:/Users/anakar/Desktop/Scratchboard/Stock prices/Input Data/Competitors/Galaxosmith-GLX.csv", header = T)[,c(1,5)]
+
+
+head(comp.stock)                             # a look at the product
+colnames(comp.stock)
+dim(comp.stock)
+
+GLX_plot = ggplot(comp.stock,aes(x=Date,y=Close)) + geom_point() + labs(title="GLX stock price")
+
+GLX_plot
+```
+
+This doesn't look right... let me check in excel if it looks different.
+Okay I checked. It's correct.
+
+now to get them all in: 
+
+```{r}
+#Now to get all 3 competitors
+
+comp.stock.path = "C:/Users/anakar/Desktop/Scratchboard/Stock prices/Input Data/Competitors"
+comp.stock.files = list.files(comp.stock.path)
+
+comp.stock.files
+comp.stock.df = comp.stock
+comp.stock.df$stock = "GSK"
+
+head(comp.stock.df)
+
+for(i in 1:length(comp.stock.files)) {
+        filename = comp.stock.files[i]
+        file = paste(comp.stock.path, filename, sep = "/")
+        read = read.csv(file, header = T)[,c(1,5)]
+
+        read$stock = filename
+        comp.stock.df = rbind(comp.stock.df,read)
+}
+
+#This is just a quality control
+      head(comp.stock.df)
+      dim(comp.stock.df)
+      dim(comp.stock)
+
+# to make the filenames into categories      
+comp.stock.df$stock = as.factor(comp.stock.df$stock)
+levels(comp.stock.df$stock)
+#######comp.stock.df$stock = substr(df$file, start = -5, stop = -8)
+
+
+dim(comp.stock.df)
+head(comp.stock.df)
+
+class(comp.stock.df)
+levels(comp.stock.df$stock)
+df = comp.stock.df
+df
+levels(df$stock)=c("GSK","GSK2","NVS","PLX")
+levels(df$stock)
+
+# Now let's take out GSK1
+
+takeout = df$stock == "GSK2"
+#takeout
+
+df = df[!takeout,]
+summary(df$stock)
+summary(df$Close[df$stock == "GSK"])
+
+
+df = comp.stock.df
+df = df[!takeout,]
+summary(df$stock)
+summary(df$Close[df$stock == "ProtalixPLX.csv"])
+
+df$Date = as.Date(df$Date, format='%Y-%m-%d')
+
+# Make shorter names
+df$filename = df$stock
+levels(df$stock) = c("GLS","test", "NVS", "PLX")
+
+# And now plotting
+plot.comp.stock = ggplot(df, aes(x=Date, y=Close, col=stock)) + geom_point()
+
+plot.comp.stock.formatted = plot.comp.stock +theme_gray(base_size = 20) + theme(legend.position="right", axis.text.x = element_text(angle = 90)) + scale_x_date(date_labels = "%Y")
+comp.stock.df = df
+
+```
+
+
+So, I'm stopping now. This is not clean but getting there...
+Updating R screwed up the ggplot somehow...
+knit and out
+16:40
+
+## New day
+What do I want to do today?
+1. Fix the scale for the last figure - done and put into the old code
+
+    Alright, I fixed a stupid bug. In the line to read the new files I had a specific file loaded up each time... nevermind, moving forward. Here's the graph: 
+
+```{r}
+plot.comp.stock.formatted
+```
+
+
+
+2. make a correlation map so that I can see correlations between different data
+
+Let's start with the weird formatting and scale from last time
+```{r}
+sum.GLS = summary(df$Close[df$stock == "GLS"])
+sum.NVS = summary(df$Close[df$stock == "NVS"])
+sum.PLX = summary(df$Close[df$stock == "PLX"])
+
+stock.GLS = df$Close[df$stock == "GLS"]
+stock.NVS = df$Close[df$stock == "NVS"]
+stock.PLX = df$Close[df$stock == "PLX"]
+print(sum.GLS)
+print(sum.NVS)
+print(sum.PLX)
+
+class(df$Close[df$stock == "GLS"])
+
+cor(stock.GLS,stock.NVS)
+
+closing = data.frame(cbind(stock.GLS, stock.NVS,stock.PLX))
+
+dim(closing)
+colnames(closing)
+cor.matrix = cor(closing)
+```
+Now to make it into a heatmap: 
+```{r}
+	if (!requireNamespace("BiocManager", quietly = TRUE))
+	        install.packages("BiocManager")
+	BiocManager::install()
+	
+	BiocManager::install(c("ComplexHeatmap", "AnnotationDbi"))
+	
+	
+	
+	library(ComplexHeatmap)
+
+
+
+
+
+Heatmap(cor.matrix, 
+        cluster_columns=FALSE,
+        cluster_rows=FALSE
+)
+
+
+```
+
+
+So - I finished what I wanted.
+This took ~1.5 hours but looks nice, no?
+Knit.
+
+
+
+
+
+
+# New day!
+What do I want to do today?
+Finish loading up different data: 
+- goods data
+- 5 more stock data
+- target stock data
+
+let's start by loading in 5 more stock data for these companies: 
+1. Gilead [GILD]
+2. CARL ZEISS MEDITEC
+3. Syngenta AG - PRIVATE, no prices
+3. Coca Cola [KO]
+4. Merck
+5. Compugen
+
+I need to first download their prices - Done, from www.finance.yahoo.com
+
+Now let's load it in
+```{r}
+
+```
