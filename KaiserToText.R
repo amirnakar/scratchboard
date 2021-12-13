@@ -1,3 +1,5 @@
+# This is a junk piece of code
+
 #### Intro ####
 # Written by Amir Nakar 19/06/2020
 # This code is meant for converting Kaiser .spc data into csv files
