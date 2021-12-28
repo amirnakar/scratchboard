@@ -2,7 +2,7 @@
 title: "Bunmi Figures"
 author: "Amir Nakar"
 date: "12/28/2021"
-output: html_document
+output: rmarkdown::github_document
 ---
 
 ```{r setup, include=FALSE}
