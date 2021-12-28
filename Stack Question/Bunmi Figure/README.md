@@ -45,3 +45,5 @@ plot = data %>%
 ### Display the plot
 plot
 ```
+![Alt text](https://github.com/amirnakar/scratchboard/blob/master/Stack%20Question/Bunmi%20Figure/plot.svg)
+<img src="https://github.com/amirnakar/scratchboard/blob/master/Stack%20Question/Bunmi%20Figure/plot.svg">
