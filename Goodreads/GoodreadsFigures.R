@@ -65,7 +65,7 @@ Plot
 svg("Goodreads/Books Per Year.svg") # Open the device
 
 # Code of the plot
-plot
+Plot
 
 # Close the graphics device
 dev.off() 
