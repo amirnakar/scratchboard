@@ -1,3 +1,6 @@
+
+```r
+
 ### Load Libraries
 library(readxl)
 library(tidyverse)
@@ -41,13 +44,5 @@ plot = data %>%
 
 ### Display the plot
 plot
-
-### Save the plot
-svg("Stack Question/Bunmi Figure/plot.svg") # Open the device
-
-# Code of the plot
-plot + theme(panel.background = element_rect(fill = 'black'))
-
-
-# Close the graphics device
-dev.off() 
+```
+![Alt text](https://github.com/amirnakar/scratchboard/blob/master/Stack%20Question/Bunmi%20Figure/plot.svg)
