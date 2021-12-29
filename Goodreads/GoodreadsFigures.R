@@ -62,7 +62,7 @@ Plot
 
 ### Save picture
 ### Save the plot
-svg("Goodreads/Books Per Year.svg") # Open the device
+jpeg("Goodreads/Books Per Year.jpg") # Open the device
 
 # Code of the plot
 Plot
