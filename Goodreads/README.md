@@ -3,7 +3,7 @@ Done with [R](https://en.wikipedia.org/wiki/R_(programming_language)) and [ggplo
 <br /> Code is [here](https://github.com/amirnakar/scratchboard/blob/master/Goodreads/GoodreadsFigures.R)
 
 
-![Books Per Year](https://github.com/amirnakar/scratchboard/blob/master/Goodreads/Rplot.jpeg)
+![Books Per Year](https://github.com/amirnakar/scratchboard/blob/master/Goodreads/Plots/Rplot.jpeg)
 
 # Second plot: Ratings per year
 Done with [Python](https://www.python.org/) and [Seaborn](https://seaborn.pydata.org/)
@@ -11,7 +11,7 @@ Done with [Python](https://www.python.org/) and [Seaborn](https://seaborn.pydata
 ### To do: 
 * Fix the legend
 * Add 📚, ⭐ emojis
-![Ratings Per Year](https://github.com/amirnakar/scratchboard/blob/master/Goodreads/Book%20Rates%20per%20year%20-%20python.svg)
+![Ratings Per Year](https://github.com/amirnakar/scratchboard/blob/master/Goodreads/Plots/Book%20Rates%20per%20year%20-%20python.svg)
 
 # Future plot: 
 I want to make an interactive plot in R so you can actually see the list of the books in each column
